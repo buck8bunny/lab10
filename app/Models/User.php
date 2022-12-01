@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Models;
-
-use Eloquent as Model;
+use Barryvdh\LaravelIdeHelper\Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-/**
+/*
  * Class User
  * @package App\Models
  * @version November 30, 2022, 9:12 pm UTC
@@ -26,18 +25,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
+    /*
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
+    /*
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -50,8 +50,8 @@ class User extends Authenticatable
 
 
 
-    /**
-     * The attributes that should be casted to native types.
+    /*
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
@@ -64,7 +64,7 @@ class User extends Authenticatable
         'remember_token' => 'string'
     ];
 
-    /**
+    /*
      * Validation rules
      *
      * @var array

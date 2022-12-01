@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 
 class UserController extends AppBaseController
@@ -20,7 +20,7 @@ class UserController extends AppBaseController
         $this->userRepository = $userRepo;
     }
 
-    /**
+    /*
      * Display a listing of the User.
      *
      * @param Request $request
@@ -35,7 +35,7 @@ class UserController extends AppBaseController
             ->with('users', $users);
     }
 
-    /**
+    /*
      * Show the form for creating a new User.
      *
      * @return Response
@@ -45,7 +45,7 @@ class UserController extends AppBaseController
         return view('users.create');
     }
 
-    /**
+    /*
      * Store a newly created User in storage.
      *
      * @param CreateUserRequest $request
@@ -63,7 +63,7 @@ class UserController extends AppBaseController
         return redirect(route('users.index'));
     }
 
-    /**
+    /*
      * Display the specified User.
      *
      * @param int $id
@@ -83,7 +83,7 @@ class UserController extends AppBaseController
         return view('users.show')->with('user', $user);
     }
 
-    /**
+    /*
      * Show the form for editing the specified User.
      *
      * @param int $id
@@ -103,7 +103,7 @@ class UserController extends AppBaseController
         return view('users.edit')->with('user', $user);
     }
 
-    /**
+    /*
      * Update the specified User in storage.
      *
      * @param int $id
@@ -128,7 +128,7 @@ class UserController extends AppBaseController
         return redirect(route('users.index'));
     }
 
-    /**
+    /*
      * Remove the specified User from storage.
      *
      * @param int $id

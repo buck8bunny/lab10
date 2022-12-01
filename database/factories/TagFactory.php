@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class TagFactory extends Factory
 {
     /*
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Tag::class;
 
     /*
      * Define the model's default state.
@@ -23,10 +23,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'email' => $this->faker->email(),
-            'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
-            'password' => $this->faker->word,
-            'remember_token' => $this->faker->word,
+            'description' => $this->faker->text,
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

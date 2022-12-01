@@ -17,9 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+\Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::resource('users', App\Http\Controllers\UserController::class);
+
+
+Route::resource('tags', App\Http\Controllers\TagController::class);
+
+
+Route::resource('statuses', App\Http\Controllers\StatusController::class);
+
+
+Route::resource('articles', App\Http\Controllers\ArticleController::class);
