@@ -67,9 +67,13 @@ class Article extends \Illuminate\Database\Eloquent\Model
     public static $rules = [
         'status_id' => 'required',
         'user_id' => 'required',
-        'title' => 'nullable|string|max:256',
-        'announce' => 'nullable|string',
-        'content' => 'nullable|string',
+        'title' => 'string|max:256',
+        'announce' => 'string',
+        'content' => 'string',
+        'tags' => 'nullable|array',
+//        'file'=>"required|max:2048",
+        'file' => 'required',
+        'file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
     ];

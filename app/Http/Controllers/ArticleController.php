@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Repositories\ArticleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 
 class ArticleController extends AppBaseController
@@ -20,7 +20,7 @@ class ArticleController extends AppBaseController
         $this->articleRepository = $articleRepo;
     }
 
-    /**
+    /*
      * Display a listing of the Article.
      *
      * @param Request $request
@@ -35,7 +35,7 @@ class ArticleController extends AppBaseController
             ->with('articles', $articles);
     }
 
-    /**
+    /*
      * Show the form for creating a new Article.
      *
      * @return Response
@@ -45,7 +45,7 @@ class ArticleController extends AppBaseController
         return view('articles.create');
     }
 
-    /**
+    /*
      * Store a newly created Article in storage.
      *
      * @param CreateArticleRequest $request
@@ -58,12 +58,16 @@ class ArticleController extends AppBaseController
 
         $article = $this->articleRepository->create($input);
 
+        if ($request->has("tags")){
+            $article->tags()->sync($request->get("tags"));
+        }
+
         Flash::success('Article saved successfully.');
 
         return redirect(route('articles.index'));
     }
 
-    /**
+    /*
      * Display the specified Article.
      *
      * @param int $id
@@ -83,7 +87,7 @@ class ArticleController extends AppBaseController
         return view('articles.show')->with('article', $article);
     }
 
-    /**
+    /*
      * Show the form for editing the specified Article.
      *
      * @param int $id
@@ -103,7 +107,7 @@ class ArticleController extends AppBaseController
         return view('articles.edit')->with('article', $article);
     }
 
-    /**
+    /*
      * Update the specified Article in storage.
      *
      * @param int $id
@@ -122,13 +126,25 @@ class ArticleController extends AppBaseController
         }
 
         $article = $this->articleRepository->update($request->all(), $id);
+        if ($request->has("tags")){
+            $article->tags()->sync($request->get("tags"));
+        }
+
+        if($request->file()) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+
+            $article->image = '/storage/' . $filePath;
+            $article->save();
+
+        }
 
         Flash::success('Article updated successfully.');
 
         return redirect(route('articles.index'));
     }
 
-    /**
+    /*
      * Remove the specified Article from storage.
      *
      * @param int $id

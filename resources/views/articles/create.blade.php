@@ -18,7 +18,7 @@
                                 <strong>Create Article</strong>
                             </div>
                             <div class="card-body">
-                                {!! Form::open(['route' => 'articles.store']) !!}
+                                {!! Form::open(['route' => 'articles.store', "enctype"=>"multipart/form-data"]) !!}
 
                                    @include('articles.fields')
 
