@@ -126,6 +126,7 @@ class ArticleController extends AppBaseController
         }
 
         $article = $this->articleRepository->update($request->all(), $id);
+
         if ($request->has("tags")){
             $article->tags()->sync($request->get("tags"));
         }
