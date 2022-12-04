@@ -72,7 +72,7 @@ class Article extends \Illuminate\Database\Eloquent\Model
         'content' => 'string',
         'tags' => 'nullable|array',
 //        'file'=>"required|max:2048",
-        'file' => 'required',
+        'file' => 'nullable',
         'file.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'

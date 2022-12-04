@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Jobs\ArticleCreatedJob;
+use App\Mail\ArticleUpdateMail;
 use App\Repositories\ArticleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Laracasts\Flash\Flash;
 use Response;
 
@@ -140,6 +143,8 @@ class ArticleController extends AppBaseController
 
         }
 
+        dispatch(new ArticleCreatedJob($article->toArray()));
+
         Flash::success('Article updated successfully.');
 
         return redirect(route('articles.index'));
@@ -165,6 +170,7 @@ class ArticleController extends AppBaseController
         }
 
         $this->articleRepository->delete($id);
+
 
         Flash::success('Article deleted successfully.');
 
