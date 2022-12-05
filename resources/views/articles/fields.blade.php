@@ -37,7 +37,7 @@
 </div>
 
 <!-- File Upload Field -->
-@if($article->image)
+@if(isset($article) && $article->image)
 <div class="form-group col-sm-6">
     {!! Form::image($article->image, $article->title, ["width"=>150]) !!}
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ArticleCreated;
 use App\Http\Requests\CreateArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Jobs\ArticleCreatedJob;
@@ -64,6 +65,7 @@ class ArticleController extends AppBaseController
         if ($request->has("tags")){
             $article->tags()->sync($request->get("tags"));
         }
+        event(new ArticleCreated($article));
 
         Flash::success('Article saved successfully.');
 
@@ -134,6 +136,8 @@ class ArticleController extends AppBaseController
             $article->tags()->sync($request->get("tags"));
         }
 
+
+
         if($request->file()) {
             $fileName = time().'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
@@ -143,8 +147,9 @@ class ArticleController extends AppBaseController
 
         }
 
-        dispatch(new ArticleCreatedJob($article->toArray()));
+//        dispatch(new ArticleCreatedJob($article->toArray()));
 
+        event(new ArticleCreated($article));
         Flash::success('Article updated successfully.');
 
         return redirect(route('articles.index'));
